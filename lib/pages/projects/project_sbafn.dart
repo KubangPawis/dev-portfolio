@@ -103,7 +103,7 @@ class ProjectSBAFN extends StatelessWidget {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              'GitHub',
+                              'Visit Site',
                               style: textTheme.bodyLarge?.copyWith(
                                 color: const Color(0xFF5F86E9),
                               ),
@@ -172,6 +172,7 @@ class ProjectSBAFN extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SectionBody(sectionText: ''),
                 ],
               ),
             ),
