@@ -32,14 +32,18 @@ class AppTheme {
 
   // ----- UTILITIES -----
   static TextTheme _buildTextTheme(TextTheme baseTheme) {
-    final textTheme = GoogleFonts.robotoMonoTextTheme(baseTheme);
+    final textTheme = GoogleFonts.sairaTextTheme(baseTheme);
 
     return baseTheme.copyWith(
       displayLarge: textTheme.displayLarge?.copyWith(
+        fontSize: 36,
         fontWeight: FontWeight.bold,
       ),
-      titleLarge: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
-      bodyLarge: textTheme.bodyLarge?.copyWith(height: 1.5),
+      titleLarge: textTheme.titleLarge?.copyWith(
+        fontSize: 22,
+        fontWeight: FontWeight.w600,
+      ),
+      bodyLarge: textTheme.bodyLarge?.copyWith(fontSize: 18, height: 1.5),
       bodyMedium: textTheme.bodyMedium?.copyWith(height: 1.5),
     );
   }
