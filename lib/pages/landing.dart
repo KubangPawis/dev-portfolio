@@ -3,6 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_icons/simple_icons.dart';
 
+import 'projects/project_sbafn.dart';
+
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
@@ -317,7 +319,7 @@ class ProjectsSection extends StatelessWidget {
             runSpacing: 32,
             children: [
               FeaturedProjectTile(
-                imagePath: 'assets/images/sbafn_banner.png',
+                imagePath: 'assets/images/project_sbafn/sbafn_code_card.png',
                 title: 'Project SBAFN',
                 description:
                     'Explainable, street-level flood-risk mapping for Philippine cities.',
@@ -328,9 +330,11 @@ class ProjectsSection extends StatelessWidget {
                   'mapillary',
                   'geospatial',
                 ],
-                onTap: () => launchExternalUrl(
-                  'https://github.com/KubangPawis/project-sbafn',
-                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const ProjectSBAFN()),
+                  );
+                },
               ),
             ],
           ),
