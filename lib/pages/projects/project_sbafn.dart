@@ -10,7 +10,7 @@ class ProjectSBAFN extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Portfolio')),
+      appBar: AppBar(backgroundColor: const Color(0xFFFAFAFA)),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(

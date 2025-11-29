@@ -11,7 +11,7 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Portfolio')),
+      appBar: AppBar(backgroundColor: const Color(0xFFFAFAFA)),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Center(
