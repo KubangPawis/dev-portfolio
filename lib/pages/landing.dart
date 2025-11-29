@@ -17,7 +17,11 @@ class LandingPage extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 1200),
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [LandingSection(), TechStackSection()],
+              children: [
+                LandingSection(),
+                TechStackSection(),
+                ProjectsSection(),
+              ],
             ),
           ),
         ),
@@ -163,130 +167,173 @@ class TechStackSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // TITLE BAR
-        SectionHeader(title: 'Tech Stack', subtitle: 'What I use to build.'),
-        const SizedBox(height: 32.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 48.0),
+      child: Column(
+        children: [
+          // TITLE BAR
+          SectionHeader(title: 'Tech Stack', subtitle: 'What I use to build.'),
+          const SizedBox(height: 32.0),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ----- LEFT COLUMN -----
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TechCategory(
-                  title: 'Languages',
-                  chips: [
-                    TechChip(
-                      icon: SimpleIcons.python,
-                      label: 'Python',
-                      color: accent,
-                    ),
-                    TechChip(icon: SimpleIcons.r, label: 'R', color: accent),
-                    TechChip(
-                      icon: SimpleIcons.postgresql,
-                      label: 'SQL',
-                      color: accent,
-                    ),
-                  ],
-                ),
-                TechCategory(
-                  title: 'Data Wrangling',
-                  chips: [
-                    TechChip(
-                      icon: SimpleIcons.pandas,
-                      label: 'Pandas',
-                      color: accent,
-                    ),
-                    TechChip(
-                      icon: SimpleIcons.numpy,
-                      label: 'NumPy',
-                      color: accent,
-                    ),
-                  ],
-                ),
-                TechCategory(
-                  title: 'Data Visualization',
-                  chips: [
-                    TechChip(
-                      icon: SimpleIcons.plotly,
-                      label: 'Matplotlib',
-                      color: accent,
-                    ),
-                    TechChip(
-                      icon: SimpleIcons.plotly,
-                      label: 'Seaborn',
-                      color: accent,
-                    ),
-                    TechChip(
-                      icon: SimpleIcons.plotly,
-                      label: 'Plotly',
-                      color: accent,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // ----- LEFT COLUMN -----
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TechCategory(
+                    title: 'Languages',
+                    chips: [
+                      TechChip(
+                        icon: SimpleIcons.python,
+                        label: 'Python',
+                        color: accent,
+                      ),
+                      TechChip(icon: SimpleIcons.r, label: 'R', color: accent),
+                      TechChip(
+                        icon: SimpleIcons.postgresql,
+                        label: 'SQL',
+                        color: accent,
+                      ),
+                    ],
+                  ),
+                  TechCategory(
+                    title: 'Data Wrangling',
+                    chips: [
+                      TechChip(
+                        icon: SimpleIcons.pandas,
+                        label: 'Pandas',
+                        color: accent,
+                      ),
+                      TechChip(
+                        icon: SimpleIcons.numpy,
+                        label: 'NumPy',
+                        color: accent,
+                      ),
+                    ],
+                  ),
+                  TechCategory(
+                    title: 'Data Visualization',
+                    chips: [
+                      TechChip(
+                        icon: SimpleIcons.plotly,
+                        label: 'Matplotlib',
+                        color: accent,
+                      ),
+                      TechChip(
+                        icon: SimpleIcons.plotly,
+                        label: 'Seaborn',
+                        color: accent,
+                      ),
+                      TechChip(
+                        icon: SimpleIcons.plotly,
+                        label: 'Plotly',
+                        color: accent,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
 
-            // ----- RIGHT COLUMN -----
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TechCategory(
-                  title: 'Machine Learning',
-                  chips: [
-                    TechChip(
-                      icon: SimpleIcons.scikitlearn,
-                      label: 'Scikit-learn',
-                      color: accent,
-                    ),
-                    TechChip(
-                      icon: SimpleIcons.tensorflow,
-                      label: 'TensorFlow',
-                      color: accent,
-                    ),
-                    TechChip(
-                      icon: SimpleIcons.pytorch,
-                      label: 'PyTorch',
-                      color: accent,
-                    ),
-                  ],
-                ),
+              // ----- RIGHT COLUMN -----
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TechCategory(
+                    title: 'Machine Learning',
+                    chips: [
+                      TechChip(
+                        icon: SimpleIcons.scikitlearn,
+                        label: 'Scikit-learn',
+                        color: accent,
+                      ),
+                      TechChip(
+                        icon: SimpleIcons.tensorflow,
+                        label: 'TensorFlow',
+                        color: accent,
+                      ),
+                      TechChip(
+                        icon: SimpleIcons.pytorch,
+                        label: 'PyTorch',
+                        color: accent,
+                      ),
+                    ],
+                  ),
 
-                TechCategory(
-                  title: 'RAG',
-                  chips: [
-                    TechChip(
-                      icon: SimpleIcons.langchain,
-                      label: 'LangChain',
-                      color: accent,
-                    ),
-                    TechChip(
-                      icon: SimpleIcons.langgraph,
-                      label: 'LangGraph',
-                      color: accent,
-                    ),
-                  ],
-                ),
+                  TechCategory(
+                    title: 'RAG',
+                    chips: [
+                      TechChip(
+                        icon: SimpleIcons.langchain,
+                        label: 'LangChain',
+                        color: accent,
+                      ),
+                      TechChip(
+                        icon: SimpleIcons.langgraph,
+                        label: 'LangGraph',
+                        color: accent,
+                      ),
+                    ],
+                  ),
 
-                TechCategory(
-                  title: 'MLOps',
-                  chips: [
-                    TechChip(
-                      icon: SimpleIcons.flask,
-                      label: 'Flask',
-                      color: accent,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
+                  TechCategory(
+                    title: 'MLOps',
+                    chips: [
+                      TechChip(
+                        icon: SimpleIcons.flask,
+                        label: 'Flask',
+                        color: accent,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProjectsSection extends StatelessWidget {
+  const ProjectsSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 32.0),
+      child: Column(
+        children: [
+          SectionHeader(
+            title: 'Featured Projects',
+            subtitle: 'What I\'ve been working on',
+          ),
+          const SizedBox(height: 32.0),
+          Wrap(
+            spacing: 24,
+            runSpacing: 32,
+            children: [
+              FeaturedProjectTile(
+                url: 'https://github.com/KubangPawis/project-sbafn',
+                imagePath: 'assets/images/sbafn_banner.png',
+                title: 'Project SBAFN',
+                description:
+                    'Explainable, street-level flood-risk mapping for Philippine cities.',
+                tags: const [
+                  'python',
+                  'pytorch',
+                  'osmnx',
+                  'mapillary',
+                  'geospatial',
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -564,6 +611,156 @@ class TechCategory extends StatelessWidget {
           const SizedBox(height: 8),
           Wrap(spacing: 16, runSpacing: 12, children: chips),
         ],
+      ),
+    );
+  }
+}
+
+class ProjectImageCard extends StatelessWidget {
+  const ProjectImageCard({
+    super.key,
+    required this.assetPath,
+    this.onTap,
+    this.aspectRatio = 16 / 9,
+  });
+
+  final String assetPath;
+  final VoidCallback? onTap;
+  final double aspectRatio;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              blurRadius: 24,
+              offset: const Offset(0, 16),
+            ),
+          ],
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: AspectRatio(
+          aspectRatio: aspectRatio,
+          child: Image.asset(assetPath, fit: BoxFit.cover),
+        ),
+      ),
+    );
+  }
+}
+
+class FeaturedProjectTile extends StatelessWidget {
+  const FeaturedProjectTile({
+    super.key,
+    required this.url,
+    required this.imagePath,
+    required this.title,
+    required this.description,
+    required this.tags,
+    this.onTap,
+  });
+
+  final String url;
+  final String imagePath;
+  final String title;
+  final String description;
+  final List<String> tags;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return InkWell(
+      // click anywhere on the tile
+      onTap: onTap,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(12),
+        topRight: Radius.circular(12),
+      ),
+      child: Container(
+        width: 520,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          border: Border.all(color: const Color(0xFFE3E1E1), width: 1.5),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ----- TOP: PNG “terminal” card -----
+            ProjectImageCard(
+              assetPath: imagePath,
+              onTap: () => launchExternalUrl(url),
+            ),
+
+            // ----- BOTTOM: title + description + tags -----
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 16.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    description,
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey[600],
+                      height: 1.4,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 6,
+                    children: [for (final tag in tags) TagChip(tag)],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TagChip extends StatelessWidget {
+  const TagChip(this.label, {super.key});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = const Color(0xFF5F86E9);
+    final textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color.withOpacity(0.6), width: 1),
+      ),
+      child: Text(
+        label,
+        style: textTheme.bodyMedium?.copyWith(
+          color: color.withOpacity(0.9),
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
