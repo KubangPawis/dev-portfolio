@@ -317,7 +317,6 @@ class ProjectsSection extends StatelessWidget {
             runSpacing: 32,
             children: [
               FeaturedProjectTile(
-                url: 'https://github.com/KubangPawis/project-sbafn',
                 imagePath: 'assets/images/sbafn_banner.png',
                 title: 'Project SBAFN',
                 description:
@@ -329,6 +328,9 @@ class ProjectsSection extends StatelessWidget {
                   'mapillary',
                   'geospatial',
                 ],
+                onTap: () => launchExternalUrl(
+                  'https://github.com/KubangPawis/project-sbafn',
+                ),
               ),
             ],
           ),
@@ -656,10 +658,9 @@ class ProjectImageCard extends StatelessWidget {
   }
 }
 
-class FeaturedProjectTile extends StatelessWidget {
+class FeaturedProjectTile extends StatefulWidget {
   const FeaturedProjectTile({
     super.key,
-    required this.url,
     required this.imagePath,
     required this.title,
     required this.description,
@@ -667,7 +668,6 @@ class FeaturedProjectTile extends StatelessWidget {
     this.onTap,
   });
 
-  final String url;
   final String imagePath;
   final String title;
   final String description;
@@ -675,64 +675,101 @@ class FeaturedProjectTile extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
+  State<FeaturedProjectTile> createState() => _FeaturedProjectTileState();
+}
+
+class _FeaturedProjectTileState extends State<FeaturedProjectTile> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return InkWell(
-      // click anywhere on the tile
-      onTap: onTap,
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(12),
-        topRight: Radius.circular(12),
-      ),
-      child: Container(
-        width: 520,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-          border: Border.all(color: const Color(0xFFE3E1E1), width: 1.5),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ----- TOP: PNG “terminal” card -----
-            ProjectImageCard(
-              assetPath: imagePath,
-              onTap: () => launchExternalUrl(url),
-            ),
+    return MouseRegion(
+      cursor: widget.onTap != null
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
 
-            // ----- BOTTOM: title + description + tags -----
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 16.0,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
+      // scale + shadow animation
+      child: AnimatedScale(
+        scale: _isHovered ? 1.02 : 1.0,
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOut,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
+          child: Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(24),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(24),
+              onTap: widget.onTap,
+              child: Container(
+                width: 520,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  border: Border.all(
+                    color: const Color(0xFFE3E1E1),
+                    width: 1.5,
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // --- TOP: your PNG terminal card ---
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                      ),
+                      child: AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Image.asset(widget.imagePath, fit: BoxFit.cover),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    description,
-                    style: textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey[600],
-                      height: 1.4,
+
+                    // --- BOTTOM: text + tags ---
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 16.0,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.title,
+                            style: textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            widget.description,
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: Colors.grey[600],
+                              height: 1.4,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 6,
+                            children: [
+                              for (final tag in widget.tags) TagChip(tag),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 6,
-                    children: [for (final tag in tags) TagChip(tag)],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
