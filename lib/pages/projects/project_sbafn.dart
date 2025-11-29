@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProjectSBAFN extends StatelessWidget {
   const ProjectSBAFN({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Portfolio')),
       backgroundColor: Colors.white,
@@ -24,6 +27,91 @@ class ProjectSBAFN extends StatelessWidget {
                     projectSubtitle:
                         'Explainable, street-level flood-risk mapping for Philippine cities.',
                     projectUrl: 'https://github.com/KubangPawis/project-sbafn',
+                  ),
+
+                  // ----- BUTTON LINKS -----
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // ----- GITHUB -----
+                      OutlinedButton(
+                        onPressed: () => launchExternalUrl(
+                          'https://github.com/KubangPawis/project-sbafn/',
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 36,
+                            vertical: 16,
+                          ),
+                          shape: const StadiumBorder(),
+                          side: const BorderSide(
+                            color: Color(0xFF5F86E9),
+                            width: 1.5,
+                          ),
+                          foregroundColor: const Color(0xFF5F86E9),
+                          textStyle: textTheme.labelLarge?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        child: Row(
+                          // mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.github,
+                              size: 18,
+                              color: const Color(0xFF5F86E9),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'GitHub',
+                              style: textTheme.bodyLarge?.copyWith(
+                                color: const Color(0xFF5F86E9),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(width: 24),
+
+                      // ----- WEBSITE -----
+                      OutlinedButton(
+                        onPressed: () => launchExternalUrl(
+                          'https://project-sbafn.vercel.app',
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 36,
+                            vertical: 16,
+                          ),
+                          shape: const StadiumBorder(),
+                          side: const BorderSide(
+                            color: Color(0xFF5F86E9),
+                            width: 1.5,
+                          ),
+                          foregroundColor: const Color(0xFF5F86E9),
+                          textStyle: textTheme.labelLarge?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.play_arrow,
+                              size: 18,
+                              color: const Color(0xFF5F86E9),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'GitHub',
+                              style: textTheme.bodyLarge?.copyWith(
+                                color: const Color(0xFF5F86E9),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 64),
 
