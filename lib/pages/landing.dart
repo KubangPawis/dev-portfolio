@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:simple_icons/simple_icons.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -16,7 +17,7 @@ class LandingPage extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 1200),
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [LandingSection()],
+              children: [LandingSection(), TechStackSection()],
             ),
           ),
         ),
@@ -156,6 +157,140 @@ class LandingSection extends StatelessWidget {
   }
 }
 
+class TechStackSection extends StatelessWidget {
+  const TechStackSection({super.key});
+  static const accent = Color(0xFF5F86E9);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // TITLE BAR
+        SectionHeader(title: 'Tech Stack', subtitle: 'What I use to build.'),
+        const SizedBox(height: 32.0),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ----- LEFT COLUMN -----
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TechCategory(
+                  title: 'Languages',
+                  chips: [
+                    TechChip(
+                      icon: SimpleIcons.python,
+                      label: 'Python',
+                      color: accent,
+                    ),
+                    TechChip(icon: SimpleIcons.r, label: 'R', color: accent),
+                    TechChip(
+                      icon: SimpleIcons.postgresql,
+                      label: 'SQL',
+                      color: accent,
+                    ),
+                  ],
+                ),
+                TechCategory(
+                  title: 'Data Wrangling',
+                  chips: [
+                    TechChip(
+                      icon: SimpleIcons.pandas,
+                      label: 'Pandas',
+                      color: accent,
+                    ),
+                    TechChip(
+                      icon: SimpleIcons.numpy,
+                      label: 'NumPy',
+                      color: accent,
+                    ),
+                  ],
+                ),
+                TechCategory(
+                  title: 'Data Visualization',
+                  chips: [
+                    TechChip(
+                      icon: SimpleIcons.plotly,
+                      label: 'Matplotlib',
+                      color: accent,
+                    ),
+                    TechChip(
+                      icon: SimpleIcons.plotly,
+                      label: 'Seaborn',
+                      color: accent,
+                    ),
+                    TechChip(
+                      icon: SimpleIcons.plotly,
+                      label: 'Plotly',
+                      color: accent,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+            // ----- RIGHT COLUMN -----
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TechCategory(
+                  title: 'Machine Learning',
+                  chips: [
+                    TechChip(
+                      icon: SimpleIcons.scikitlearn,
+                      label: 'Scikit-learn',
+                      color: accent,
+                    ),
+                    TechChip(
+                      icon: SimpleIcons.tensorflow,
+                      label: 'TensorFlow',
+                      color: accent,
+                    ),
+                    TechChip(
+                      icon: SimpleIcons.pytorch,
+                      label: 'PyTorch',
+                      color: accent,
+                    ),
+                  ],
+                ),
+
+                TechCategory(
+                  title: 'RAG',
+                  chips: [
+                    TechChip(
+                      icon: SimpleIcons.langchain,
+                      label: 'LangChain',
+                      color: accent,
+                    ),
+                    TechChip(
+                      icon: SimpleIcons.langgraph,
+                      label: 'LangGraph',
+                      color: accent,
+                    ),
+                  ],
+                ),
+
+                TechCategory(
+                  title: 'MLOps',
+                  chips: [
+                    TechChip(
+                      icon: SimpleIcons.flask,
+                      label: 'Flask',
+                      color: accent,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
 // ----- UTILITIES -----
 
 Future<void> launchExternalUrl(String urlString) async {
@@ -163,6 +298,33 @@ Future<void> launchExternalUrl(String urlString) async {
 
   if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
     throw Exception('Could not launch $urlString');
+  }
+}
+
+class SectionHeader extends StatelessWidget {
+  const SectionHeader({super.key, required this.title, required this.subtitle});
+
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return Row(
+      children: [
+        Text(title, style: textTheme.titleLarge),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Container(height: 3.0, color: const Color(0xFF5F86E9)),
+          ),
+        ),
+        Text(
+          subtitle,
+          style: textTheme.bodyLarge?.copyWith(color: Color(0xFF929292)),
+        ),
+      ],
+    );
   }
 }
 
@@ -331,6 +493,76 @@ class IntroBlurb extends StatelessWidget {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class TechChip extends StatelessWidget {
+  const TechChip({
+    super.key,
+    required this.icon,
+    required this.label,
+    this.color = const Color(0xFF5F86E9),
+  });
+
+  final IconData icon;
+  final String label;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color, width: 1.4),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: color),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: textTheme.bodyMedium?.copyWith(
+              color: color,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TechCategory extends StatelessWidget {
+  const TechCategory({super.key, required this.title, required this.chips});
+
+  final String title;
+  final List<Widget> chips;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[700],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Wrap(spacing: 16, runSpacing: 12, children: chips),
         ],
       ),
     );
