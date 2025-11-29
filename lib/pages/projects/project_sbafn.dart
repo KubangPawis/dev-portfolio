@@ -157,9 +157,9 @@ class ProjectSBAFN extends StatelessWidget {
                         ''',
                   ),
 
-                  // ----- PROJECT METHODOLOGY -----
+                  // ----- PROJECT METHODOLOGY DIAGRAM -----
                   SectionHeader(
-                    title: 'Methodology',
+                    title: 'Methodology Diagram',
                     subtitle: 'Behind the scenes.',
                   ),
 
@@ -172,7 +172,53 @@ class ProjectSBAFN extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SectionBody(sectionText: ''),
+
+                  const SizedBox(height: 64),
+
+                  // ----- DEVELOPMENT PROCESS SUMMARY -----
+                  const SectionHeader(
+                    title: 'Development Process Summary',
+                    subtitle: 'How I built it.',
+                  ),
+                  const SizedBox(height: 24),
+
+                  const SubsectionTitle('Methodology used'),
+                  const BulletList(
+                    items: [
+                      'Problem framing & scoping – defined the goal as producing street-level, explainable flood-risk scores for each road segment in Philippine cities instead of coarse barangay-level polygons.',
+                      'Data collection & preprocessing – ingested ~440k Mapillary street-view images plus open geospatial data (road networks, elevation/topography, historical flood reports) and joined them into a per-street-segment dataset.',
+                      'Computer vision stage – trained a YOLOv11 model on Mapillary imagery to detect physical flood-proneness indicators such as drainage grates, curb inlets, vegetation strips, and infrastructure cues along streets.',
+                      'Risk-scoring stage – built a Positive–Unlabeled LightGBM model to score flood risk per street segment using elevation, width, land context, and CV-detected infrastructure features, supervised by historical flood reports.',
+                      'Explainability & UX – designed the scoring so each segment’s risk can be decomposed into contributing factors and surfaced as human-readable explanations in the map UI.',
+                      'Iterative validation – ran sanity checks and rainfall scenarios to see whether model outputs align with known flood-prone streets and expert expectations, then refined features and thresholds.',
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  const SubsectionTitle('Tools used during development'),
+                  const BulletList(
+                    items: [
+                      'Core stack – Python for data pipelines and experimentation, with Jupyter Notebooks for exploratory analysis.',
+                      'Computer vision & ML – YOLOv11 (Ultralytics) for object detection on Mapillary images, and LightGBM for the Positive–Unlabeled flood-risk model, with NumPy / Pandas / scikit-learn for preprocessing and metrics.',
+                      'Geospatial & data – Mapillary API/exports for street-view imagery and OSM-based tools (e.g., OSMnx / GeoPandas) for road-network extraction and geospatial joins.',
+                      'Application & delivery – a web frontend deployed on Vercel to present the interactive flood-risk map, with Git + GitHub for version control, collaboration, and issue tracking.',
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  const SubsectionTitle('My role and contributions'),
+                  const BulletList(
+                    items: [
+                      'Project lead & pipeline architect – led a 4-person team and designed the end-to-end architecture from data ingestion → CV model → PU LightGBM scoring → interactive map UI.',
+                      'Computer vision & modeling engineer – implemented the YOLOv11 training pipeline on ~440k Mapillary images and designed/trained the Positive–Unlabeled LightGBM model, including feature selection and tuning.',
+                      'Geospatial data engineer & product shaper – built the per-street-segment dataset by joining imagery-derived features with elevation, road geometry, and flood records, and defined the explainability scheme for each street.',
+                      'Documentation & communication – authored technical documentation and project narrative, and prepared demos showing how LGUs can use SBAFN outputs for planning, work orders, and DRRM briefings.',
+                    ],
+                  ),
+
+                  const SizedBox(height: 64),
                 ],
               ),
             ),
@@ -266,6 +312,51 @@ class TitleHeader extends StatelessWidget {
         // const SizedBox(height: 16.0),
         // Text(projectSubtitle, style: textTheme.bodyLarge),
       ],
+    );
+  }
+}
+
+class SubsectionTitle extends StatelessWidget {
+  const SubsectionTitle(this.label, {super.key});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+      child: Text(
+        label,
+        style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+}
+
+class BulletList extends StatelessWidget {
+  const BulletList({super.key, required this.items});
+
+  final List<String> items;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: items.map((item) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('•  '),
+              Expanded(child: Text(item, style: textTheme.bodyLarge)),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 }
