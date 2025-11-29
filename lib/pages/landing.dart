@@ -100,7 +100,9 @@ class LandingSection extends StatelessWidget {
 
                 // RESUME BUTTON
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () => launchExternalUrl(
+                    'https://drive.google.com/file/d/1olHYgjHiz4-InvH_l5N997FPhQH1Rt-e/view?usp=sharing',
+                  ),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 36,
