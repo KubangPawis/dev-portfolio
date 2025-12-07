@@ -1,0 +1,25 @@
+:root {
+  --bg: #272433;
+  --primary: #5d5697;
+  --text: #eeeeee;
+  --card-bg: #403d5b;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+}
