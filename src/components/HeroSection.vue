@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { defineComponent, h } from 'vue'
+
+import ActiveIcon from './ActiveIcon.vue'
+import DividerLine from './DividerLine.vue'
 import TerminalBar from '@/components/TerminalBar.vue'
 import HeroChip from '@/components/HeroChip.vue'
 import ProfileImage from '@/assets/images/me_photo.jpg'
@@ -23,27 +27,37 @@ interface Profile {
 }
 
 const p = profile as Profile
+
+const ActiveStatusIcon = defineComponent({
+  name: 'ActiveStatusIcon',
+  setup() {
+    return () => h(ActiveIcon, { active: true, size: 22, color: '#31E862' })
+  },
+})
 </script>
 
 <template>
   <div class="rounded-2xl overflow-hidden">
     <TerminalBar />
     <div
-      class="flex flex-col items-center justify-center text-center bg-(--card-bg) px-[124px] py-8 w-full h-full"
+      class="flex flex-col items-center justify-center text-center bg-(--card-bg) px-[136px] py-8 w-full h-full"
     >
-      <img :src="ProfileImage" alt="Profile Avatar" class="w-[200px] h-[200px] mb-5 rounded-full" />
+      <img :src="ProfileImage" alt="Profile Avatar" class="w-[200px] h-[200px] rounded-full" />
+      <DividerLine width="200px" marginTop="24px" marginBottom="24px" />
       <h1 class="text-4xl font-bold">{{ p.name }}</h1>
       <h2 class="mb-6 text-xl font-semibold text-(--hero-title-accent)">{{ p.title }}</h2>
 
       <!-- STATUS CHIPS -->
       <div class="mb-5 flex gap-2">
+        <HeroChip :icon="ActiveStatusIcon" :label="p.status" />
         <HeroChip :icon="LocationIcon" :label="p.location" />
       </div>
 
       <!-- BIO -->
-      <p class="mb-4 text-sm/8 font-medium max-w-[70%]">{{ p.bio }}</p>
+      <p class="text-sm/8 font-medium max-w-[65%]">{{ p.bio }}</p>
 
       <!-- SOCIALS -->
+      <DividerLine width="70px" marginTop="24px" marginBottom="18px" />
       <div class="flex gap-2">
         <EmailIcon class="w-7 h-7" />
         <GitHubIcon class="w-7 h-7" />

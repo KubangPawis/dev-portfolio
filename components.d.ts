@@ -11,6 +11,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ActiveIcon: typeof import('./src/components/ActiveIcon.vue')['default']
+    Divider: typeof import('./src/components/Divider.vue')['default']
+    DividerLine: typeof import('./src/components/DividerLine.vue')['default']
     HeroChip: typeof import('./src/components/HeroChip.vue')['default']
     HeroSection: typeof import('./src/components/HeroSection.vue')['default']
     IHeroiconsSolidMapPin: typeof import('~icons/heroicons-solid/map-pin')['default']
