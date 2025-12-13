@@ -34,6 +34,17 @@ const ActiveStatusIcon = defineComponent({
     return () => h(ActiveIcon, { active: true, size: 22, color: '#31E862' })
   },
 })
+
+function highlightLabel(label: string, wordsToHighlight: string[]): string {
+  for (let i = 0; i < wordsToHighlight.length; i++) {
+    const word = wordsToHighlight[i]
+    const regex = new RegExp(`(${word})`, 'gi')
+    label = label.replace(regex, `<span class="highlighted-text">$1</span>`)
+  }
+  return label
+}
+
+const highlightedBio = highlightLabel(p.bio, ['Python', 'healthcare', 'financial'])
 </script>
 
 <template>
@@ -54,7 +65,7 @@ const ActiveStatusIcon = defineComponent({
       </div>
 
       <!-- BIO -->
-      <p class="text-sm/8 font-medium max-w-[65%]">{{ p.bio }}</p>
+      <p class="text-sm/8 font-medium max-w-[65%]" v-html="highlightedBio"></p>
 
       <!-- SOCIALS -->
       <DividerLine width="70px" marginTop="24px" marginBottom="18px" />

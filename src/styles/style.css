@@ -36,3 +36,8 @@ body {
   max-width: var(--container-max-width);
   max-height: var(--container-max-height);
 }
+
+.highlighted-text {
+  font-weight: bold;
+  text-decoration: underline;
+}
